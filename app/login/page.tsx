@@ -1,11 +1,14 @@
 import { signInAction } from "@/app/actions";
 import { BrandMark } from "@/components/brand-mark";
+import { visualAssets } from "@/lib/visual-assets";
+import Image from "next/image";
 
 export default async function Login({ searchParams }: { searchParams: Promise<{ error?: string; next?: string }> }) {
   const params = await searchParams;
   return (
     <main className="relative z-10 grid min-h-screen place-items-center px-4 py-10">
-      <section className="w-full max-w-md rounded-[2rem] border border-white/10 bg-white/[0.06] p-7 shadow-glow backdrop-blur-xl">
+      <div className="grid w-full max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-glow backdrop-blur-xl lg:grid-cols-[1fr_.9fr]">
+      <section className="p-7">
         <BrandMark />
         <h1 className="mt-8 text-3xl font-black text-white">Ingreso operativo</h1>
         <p className="mt-2 text-sm leading-relaxed text-arena/65">Acceso seguro para centro de control, ministerio, fuerzas, transito y municipios.</p>
@@ -23,6 +26,16 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           <p className="mt-2 text-xs text-arena/55">Abre la app operativa completa con datos ficticios, sin modificar Supabase real.</p>
         </div>
       </section>
+      <aside className="relative hidden min-h-[620px] lg:block">
+        <Image src={visualAssets.commandCenter.src} alt={visualAssets.commandCenter.alt} fill sizes="45vw" className="object-cover opacity-75" priority />
+        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/50 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-8">
+          <p className="text-xs font-black uppercase tracking-[0.28em] text-copper">PUKARA 360</p>
+          <h2 className="mt-3 text-4xl font-black text-white">Centro de comando territorial</h2>
+          <p className="mt-3 text-sm leading-relaxed text-arena/75">Seguridad, tránsito, respuesta, riesgo satelital e inteligencia operativa en una sola plataforma.</p>
+        </div>
+      </aside>
+      </div>
     </main>
   );
 }

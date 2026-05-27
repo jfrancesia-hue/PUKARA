@@ -1,9 +1,12 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, BarChart3, CheckCircle2, Flame, Map, RadioTower, Satellite, Siren } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
 import { MapSection } from "@/components/map-section";
 import { StatusBadge } from "@/components/status-badge";
+import { VisualImageCard } from "@/components/visual-image-card";
 import { demoIncidents, demoTraffic, demoUnits } from "@/lib/demo-data";
+import { visualAssets } from "@/lib/visual-assets";
 
 export default function Home() {
   const modules = [
@@ -60,17 +63,61 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="glass-panel rounded-[2rem] p-3">
-          <div className="mb-3 flex items-center justify-between px-2">
-            <p className="text-xs font-black uppercase tracking-[0.24em] text-techno">Mapa demo Catamarca</p>
-            <StatusBadge value="critica" kind="priority" />
+        <div className="space-y-4">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04] p-3 shadow-glow">
+            <div className="absolute inset-0">
+              <Image src={visualAssets.mountainTerritory.src} alt={visualAssets.mountainTerritory.alt} fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover opacity-35" priority />
+              <div className="absolute inset-0 bg-gradient-to-br from-night via-night/70 to-cardon/70" />
+            </div>
+            <div className="relative">
+              <div className="mb-3 flex items-center justify-between px-2">
+                <p className="text-xs font-black uppercase tracking-[0.24em] text-techno">Mapa demo Catamarca</p>
+                <StatusBadge value="critica" kind="priority" />
+              </div>
+              <MapSection incidents={demoIncidents} units={demoUnits} traffic={demoTraffic} height={460} />
+            </div>
           </div>
-          <MapSection incidents={demoIncidents} units={demoUnits} traffic={demoTraffic} height={460} />
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              ["Focos", "calor"],
+              ["Unidades", "vivas"],
+              ["SLA", "respuesta"]
+            ].map(([title, text]) => (
+              <div key={title} className="rounded-3xl border border-white/10 bg-white/[0.055] p-4 backdrop-blur-xl">
+                <p className="text-2xl font-black text-white">{title}</p>
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-techno">{text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 pb-20 md:px-8">
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="mb-8 grid gap-5 lg:grid-cols-3">
+          <VisualImageCard
+            src={visualAssets.commandCenter.src}
+            alt={visualAssets.commandCenter.alt}
+            eyebrow="Centro de comando"
+            title="Operación moderna"
+            description="Interfaz pensada para salas de monitoreo, coordinación interministerial y respuesta 24/7."
+          />
+          <VisualImageCard
+            src={visualAssets.satelliteEarth.src}
+            alt={visualAssets.satelliteEarth.alt}
+            eyebrow="Inteligencia territorial"
+            title="Capa satelital"
+            description="Preparado para integrar focos de calor, clima, sequía, vegetación y cambios de cobertura."
+          />
+          <VisualImageCard
+            src={visualAssets.forestRisk.src}
+            alt={visualAssets.forestRisk.alt}
+            eyebrow="Prevención"
+            title="Riesgo ambiental"
+            description="Monitoreo preventivo para incendios, crecidas, desmonte y eventos de defensa civil."
+          />
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-6">
           {[
             { icon: Siren, title: "Incidentes", text: "CRUD, timeline, criticidad, evidencias y asignacion." },
             { icon: RadioTower, title: "Despacho", text: "Control de tiempos y estados operativos por unidad." },

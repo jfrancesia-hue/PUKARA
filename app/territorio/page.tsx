@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { AlertTriangle, Flame, RadioTower, Satellite, ShieldCheck } from "lucide-react";
 import { AppShell } from "@/components/app-shell";
 import { KpiCard } from "@/components/kpi-card";
@@ -5,6 +6,7 @@ import { PageHeading } from "@/components/page-heading";
 import { RiskBadge } from "@/components/risk-badge";
 import { formatDateTime } from "@/lib/utils";
 import { riskSummary, riskZones, satelliteLayers } from "@/lib/territorial-risk-data";
+import { visualAssets } from "@/lib/visual-assets";
 
 export const dynamic = "force-dynamic";
 
@@ -16,6 +18,29 @@ export default function TerritorioPage() {
         title="Riesgo territorial y prevención de incendios"
         description="Modulo preventivo para anticipar focos de calor, sequia, tormentas, inundaciones y cambios de cobertura con inteligencia territorial."
       />
+
+      <section className="mb-6 grid gap-5 lg:grid-cols-[1.2fr_.8fr]">
+        <div className="relative min-h-80 overflow-hidden rounded-[2rem] border border-white/10 shadow-glow">
+          <Image src={visualAssets.satelliteEarth.src} alt={visualAssets.satelliteEarth.alt} fill sizes="(max-width: 1024px) 100vw, 60vw" className="object-cover opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-r from-night via-night/70 to-transparent" />
+          <div className="relative flex min-h-80 max-w-2xl flex-col justify-end p-7">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-copper">Visión satelital demo</p>
+            <h2 className="mt-3 text-4xl font-black tracking-tight text-white">Anticipar antes que responder</h2>
+            <p className="mt-3 text-sm leading-relaxed text-arena/75">
+              Este módulo queda listo para conectar fuentes reales de focos de calor, clima, vegetación y riesgo hídrico.
+            </p>
+          </div>
+        </div>
+        <div className="relative min-h-80 overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.04]">
+          <Image src={visualAssets.forestRisk.src} alt={visualAssets.forestRisk.alt} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover opacity-55" />
+          <div className="absolute inset-0 bg-gradient-to-t from-night via-cardon/70 to-transparent" />
+          <div className="relative flex min-h-80 flex-col justify-end p-7">
+            <p className="text-xs font-black uppercase tracking-[0.28em] text-techno">Defensa civil</p>
+            <h3 className="mt-3 text-3xl font-black text-white">Incendios, sequía e inundaciones</h3>
+            <p className="mt-3 text-sm leading-relaxed text-arena/75">Alertas preventivas con recomendaciones operativas por jurisdicción.</p>
+          </div>
+        </div>
+      </section>
 
       <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
         <KpiCard title="Riesgo critico" value={riskSummary.critical} hint="Zonas que requieren verificacion inmediata" icon={Flame} tone="alert" />
