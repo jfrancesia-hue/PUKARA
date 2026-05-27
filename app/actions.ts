@@ -36,6 +36,11 @@ export async function signInAction(formData: FormData) {
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const next = String(formData.get("next") ?? "/dashboard");
+
+  if (email.trim().toLowerCase() === "demo@pukara360.demo" && password === "PukaraDemo360!") {
+    redirect("/demo");
+  }
+
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) redirect(`/login?error=${encodeURIComponent(error.message)}`);
   redirect(next.startsWith("/") ? next : "/dashboard");

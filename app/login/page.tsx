@@ -16,6 +16,12 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           <div><label className="text-xs font-bold uppercase tracking-[0.2em] text-arena/60">Clave</label><input className="field mt-2" type="password" name="password" required /></div>
           <button className="btn-primary w-full" type="submit">Entrar al comando</button>
         </form>
+        <div className="mt-5 rounded-2xl border border-copper/25 bg-copper/10 p-4 text-sm text-arena/80">
+          <p className="font-black uppercase tracking-[0.18em] text-copper">Acceso demo</p>
+          <p className="mt-2"><b>Usuario:</b> demo@pukara360.demo</p>
+          <p><b>Clave:</b> PukaraDemo360!</p>
+          <p className="mt-2 text-xs text-arena/55">Redirige a una demo ficticia, sin modificar Supabase real.</p>
+        </div>
       </section>
     </main>
   );
