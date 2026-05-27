@@ -17,7 +17,6 @@
     "leaflet": "latest",
     "lucide-react": "latest",
     "next": "^16.0.0",
-    "pg": "^8.21.0",
     "react": "latest",
     "react-dom": "latest",
     "react-leaflet": "latest",
@@ -25,7 +24,6 @@
     "zod": "latest"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "latest",
     "@tailwindcss/typography": "latest",
     "@types/leaflet": "latest",
     "@types/node": "latest",
