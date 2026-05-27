@@ -43,11 +43,16 @@ export default function Home() {
             PUKARA 360 es un centro de comando digital para gobiernos provinciales: registra incidentes, visualiza emergencias,
             despacha unidades, coordina transito, recibe reportes ciudadanos y audita cada accion.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
             <Link href="/demo" className="btn-primary text-base">
               Abrir demo ficticia <ArrowRight className="h-5 w-5" />
             </Link>
-            <Link href="/reportar" className="btn-secondary text-base">Probar portal ciudadano</Link>
+            <Link
+              href="/portal-ciudadano"
+              className="inline-flex items-center justify-center gap-3 rounded-[1.35rem] border border-copper/50 bg-copper px-6 py-4 text-base font-black uppercase tracking-[0.08em] text-night shadow-[0_0_38px_rgba(200,120,58,.34)] transition hover:-translate-y-0.5 hover:bg-[#e18a45] hover:shadow-[0_0_48px_rgba(200,120,58,.48)] sm:px-7 sm:py-5"
+            >
+              Portal ciudadano <ArrowRight className="h-5 w-5" />
+            </Link>
           </div>
           <div className="mt-4 rounded-3xl border border-techno/20 bg-techno/10 p-4 text-sm text-arena/75">
             <b className="text-techno">Web app móvil:</b> desde Chrome o Safari podés instalar PUKARA 360 en el inicio del celular y usarla en pantalla completa.
