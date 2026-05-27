@@ -1,0 +1,60 @@
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --background: #071a2c;
+  --foreground: #eef8f4;
+}
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0;
+  background:
+    linear-gradient(rgba(231, 211, 176, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(231, 211, 176, 0.025) 1px, transparent 1px),
+    radial-gradient(circle at 18% 0%, rgba(24,183,164,.18), transparent 34%),
+    radial-gradient(circle at 90% 10%, rgba(200,120,58,.13), transparent 32%),
+    #071A2C;
+  background-size: 44px 44px, 44px 44px, auto, auto, auto;
+  color: var(--foreground);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .11;
+  background-image:
+    repeating-radial-gradient(ellipse at 15% 20%, transparent 0 16px, rgba(231,211,176,.45) 17px, transparent 18px),
+    repeating-radial-gradient(ellipse at 85% 80%, transparent 0 20px, rgba(24,183,164,.45) 21px, transparent 22px);
+  mix-blend-mode: screen;
+  z-index: 0;
+}
+
+button, input, textarea, select { font: inherit; }
+.leaflet-container { background: #071A2C; border-radius: 1.5rem; }
+.leaflet-control-attribution { background: rgba(7,26,44,.75) !important; color: #E7D3B0 !important; }
+.leaflet-control-attribution a { color: #18B7A4 !important; }
+
+@layer components {
+  .glass-panel {
+    @apply border border-white/10 bg-white/[0.055] shadow-glow backdrop-blur-xl;
+  }
+  .field {
+    @apply w-full rounded-2xl border border-white/10 bg-night/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-arena/40 focus:border-techno/70 focus:ring-2 focus:ring-techno/20;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl bg-techno px-4 py-3 text-sm font-bold text-night shadow-glow transition hover:bg-[#35d9c5] disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-3 text-sm font-semibold text-arena transition hover:border-techno/50 hover:text-white;
+  }
+  .section-title {
+    @apply text-xl font-black tracking-tight text-white md:text-2xl;
+  }
+}

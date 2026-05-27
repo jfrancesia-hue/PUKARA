@@ -1,0 +1,239 @@
+Actuá como arquitecto senior full-stack, diseñador UX/UI institucional y director creativo de marca govtech.
+
+Necesito desarrollar una plataforma completa llamada:
+
+PUKARÁ 360
+Plataforma Unificada de Seguridad, Tránsito y Respuesta Territorial
+
+Desarrollado por:
+Nativos Consultora Digital
+
+IDENTIDAD DEL PRODUCTO
+El sistema debe transmitir:
+- fortaleza
+- territorio
+- control
+- tecnología soberana
+- identidad norteña (NOA argentino)
+
+Inspiración conceptual:
+- fortalezas andinas (pukará)
+- cerros del norte
+- cardones
+- mapas topográficos
+- cobre mineral
+- vigilancia territorial
+- centros de comando modernos
+
+ESTÉTICA VISUAL (MUY IMPORTANTE)
+NO usar estética SaaS genérica.
+
+La interfaz debe combinar:
+- centro de monitoreo moderno
+- identidad territorial del norte argentino
+
+Paleta obligatoria:
+- Verde cardón profundo: #123C2F
+- Verde monte: #1F6B4A
+- Turquesa tecnológico: #18B7A4
+- Cobre mineral: #C8783A
+- Arena cálida: #E7D3B0
+- Azul noche: #071A2C
+- Rojo alerta: #D94141
+- Amarillo emergencia: #F2B84B
+
+Estilo:
+- dark mode dominante
+- mapas oscuros
+- glow tecnológico sutil
+- glassmorphism leve
+- líneas topográficas sutiles
+- grillas limpias
+- UI premium tipo centro de comando
+
+OBJETIVO DEL PROYECTO
+Crear un MVP funcional real para gobierno provincial que permita:
+
+- registrar incidentes
+- visualizar emergencias en mapa
+- asignar unidades
+- gestionar tránsito
+- recibir reportes ciudadanos
+- medir tiempos de respuesta
+- generar reportes
+- auditar actividad completa
+
+NO usar blockchain en esta etapa.
+
+STACK OBLIGATORIO
+- Next.js 16
+- React
+- TypeScript
+- Tailwind CSS
+- Supabase (DB + Auth + Storage + Realtime)
+- Recharts
+- MapLibre o Leaflet
+
+ARQUITECTURA
+- modular
+- escalable
+- multi-rol
+- RLS activa
+- backend real (NO mock)
+
+ROLES
+- superadmin
+- ministerio
+- centro_control
+- policia
+- transito
+- municipio
+- ciudadano
+
+MÓDULOS
+
+1. Dashboard Ejecutivo (/dashboard)
+KPIs:
+- incidentes del día
+- activos
+- críticos
+- tiempo de respuesta
+- unidades disponibles
+- heatmap de zonas
+
+2. Mapa Operativo (/mapa)
+- incidentes
+- unidades
+- tránsito
+- filtros
+- detalle interactivo
+
+3. Incidentes (/incidentes)
+CRUD completo
+timeline
+asignación
+evidencias
+
+Estados:
+nuevo, validado, asignado, en_camino, en_sitio, resuelto, cancelado
+
+4. Despacho (/despacho)
+- asignación de unidades
+- control de tiempos
+- estados operativos
+
+5. Unidades (/unidades)
+- patrulleros
+- motos
+- ambulancias
+- defensa civil
+
+6. Tránsito (/transito)
+- cortes
+- accidentes
+- eventos
+
+7. Portal ciudadano (/reportar)
+- denuncia simple
+- ubicación
+- evidencia
+
+8. Alertas (/alertas)
+- incidentes críticos
+- sin asignar
+
+9. Reportes (/reportes)
+- gráficos
+- export CSV
+
+10. Auditoría (/auditoria)
+- registro completo de acciones
+
+BASE DE DATOS
+Crear SQL completo con:
+
+tablas:
+profiles
+jurisdicciones
+incidents
+incident_events
+units
+traffic_events
+attachments
+audit_logs
+notifications
+
+Agregar:
+- índices
+- relaciones
+- triggers updated_at
+- función de código SEG-XXXX
+- RLS por rol
+
+DATOS DEMO
+Usar Catamarca:
+- Capital
+- Valle Viejo
+- Belén
+- Andalgalá
+
+Crear:
+- robos
+- accidentes
+- cortes
+- disturbios
+- emergencias médicas
+
+UI COMPONENTES
+Crear:
+
+- AppShell
+- Sidebar institucional
+- Topbar
+- KpiCard
+- StatusBadge
+- IncidentTable
+- IncidentForm
+- OperationalMap
+- DispatchPanel
+- ReportCharts
+
+FUNCIONALIDAD REALTIME
+- Supabase realtime en incidentes
+- actualizar mapa en vivo
+- actualizar dashboard
+
+ARCHIVOS
+- subir evidencia a storage
+- visualizar imágenes
+
+SEGURIDAD
+- RLS estricta
+- permisos por rol
+- validaciones server-side
+
+PLUS
+- modo fullscreen centro de comando
+- timeline visual de incidente
+- cálculo automático tiempo respuesta
+- semáforo de criticidad
+- panel situación actual
+
+ENTREGABLES
+- código completo
+- SQL
+- seeds
+- README
+- env.example
+- instrucciones deploy Vercel
+
+CRITERIOS
+Debe ser:
+- vendible a gobierno
+- visualmente impactante
+- funcional
+- sin mocks
+- sin errores
+- listo para demo
+
+Empezar por arquitectura y luego implementar módulos conectados.
