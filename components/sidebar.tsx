@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Activity, AlertTriangle, BarChart3, Bell, Bot, Car, FileText, Gauge, Map, RadioTower, Satellite, Shield, Siren, Users } from "lucide-react";
+import { Activity, AlertTriangle, BarChart3, Bell, Bot, Car, FileText, Gauge, Map, RadioTower, Satellite, Shield, Siren } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
 import { cn } from "@/lib/utils";
 
@@ -42,8 +42,7 @@ const items = [
   { href: "/transito", label: "Transito", icon: Car, tone: "amarillo" },
   { href: "/alertas", label: "Alertas", icon: AlertTriangle, tone: "rojo" },
   { href: "/reportes", label: "Reportes", icon: BarChart3, tone: "verde" },
-  { href: "/auditoria", label: "Auditoria", icon: FileText, tone: "verde" },
-  { href: "/reportar", label: "Portal ciudadano", icon: Users, tone: "verde" }
+  { href: "/auditoria", label: "Auditoria", icon: FileText, tone: "verde" }
 ] as const;
 
 export function AppSidebar({ role }: { role?: string }) {

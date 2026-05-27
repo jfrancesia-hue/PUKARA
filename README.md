@@ -23,7 +23,8 @@ Plataforma Unificada de Seguridad, Transito y Respuesta Territorial para gobiern
 - `/ia` IA operativa demo, recomendaciones y clasificación sin conexión externa
 - `/notificaciones` reglas de alerta y bandeja demo sin envíos externos
 - `/transito` cortes, accidentes y eventos
-- `/reportar` portal ciudadano publico
+- `/reportar` portal ciudadano público externo
+- `/portal-ciudadano` alias público del portal ciudadano
 - `/alertas` incidentes criticos y sin asignar
 - `/reportes` graficos y CSV
 - `/auditoria` trazabilidad de acciones
