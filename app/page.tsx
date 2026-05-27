@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, CheckCircle2, Map, RadioTower, Siren } from "lucide-react";
+import { ArrowRight, BarChart3, CheckCircle2, Flame, Map, RadioTower, Satellite, Siren } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
 import { MapSection } from "@/components/map-section";
 import { StatusBadge } from "@/components/status-badge";
@@ -11,6 +11,8 @@ export default function Home() {
     "Mapa operativo",
     "Gestion de incidentes",
     "Despacho de unidades",
+    "Prevencion de incendios",
+    "Monitoreo satelital",
     "Transito y cortes",
     "Portal ciudadano",
     "Reportes y auditoria"
@@ -73,6 +75,8 @@ export default function Home() {
             { icon: Siren, title: "Incidentes", text: "CRUD, timeline, criticidad, evidencias y asignacion." },
             { icon: RadioTower, title: "Despacho", text: "Control de tiempos y estados operativos por unidad." },
             { icon: Map, title: "Mapa vivo", text: "Emergencias, unidades y transito en territorio." },
+            { icon: Flame, title: "Incendios", text: "Prevencion por focos de calor, sequia y riesgo forestal." },
+            { icon: Satellite, title: "Satelital", text: "Capas de anomalias termicas, vegetacion y cobertura." },
             { icon: BarChart3, title: "Reportes", text: "Graficos, CSV y auditoria institucional." }
           ].map((item) => (
             <article key={item.title} className="glass-panel rounded-3xl p-5">

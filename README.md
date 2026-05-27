@@ -19,6 +19,7 @@ Plataforma Unificada de Seguridad, Transito y Respuesta Territorial para gobiern
 - `/incidentes` CRUD, timeline, despacho y evidencias
 - `/despacho` asignacion de unidades y estados
 - `/unidades` recursos operativos
+- `/territorio` monitoreo satelital, prevención de incendios y riesgo territorial
 - `/transito` cortes, accidentes y eventos
 - `/reportar` portal ciudadano publico
 - `/alertas` incidentes criticos y sin asignar

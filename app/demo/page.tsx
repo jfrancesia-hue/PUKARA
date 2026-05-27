@@ -7,6 +7,7 @@ import { MapSection } from "@/components/map-section";
 import { PageHeading } from "@/components/page-heading";
 import { ReportCharts } from "@/components/report-charts";
 import { demoIncidents, demoKpis, demoTraffic, demoUnits } from "@/lib/demo-data";
+import { riskSummary } from "@/lib/territorial-risk-data";
 
 export const dynamic = "force-static";
 
@@ -42,6 +43,17 @@ export default function DemoPage() {
           <KpiCard title="Criticos" value={demoKpis.critical} hint="Semaforo rojo operativo" icon={AlertTriangle} tone="alert" />
           <KpiCard title="Respuesta prom." value={`${demoKpis.avgResponse}m`} hint="Indicador ficticio para demo" icon={Clock} tone="emergency" />
           <KpiCard title="Unidades disp." value={demoKpis.availableUnits} hint="Recursos ficticios listos" icon={ShieldCheck} />
+        </section>
+
+        <section className="mt-5 rounded-3xl border border-copper/20 bg-copper/10 p-5">
+          <div className="flex flex-col justify-between gap-4 md:flex-row md:items-center">
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.24em] text-copper">Nuevo módulo preventivo</p>
+              <h2 className="mt-2 text-2xl font-black text-white">Riesgo territorial, incendios y monitoreo satelital</h2>
+              <p className="mt-2 text-sm text-arena/70">Incluye {riskSummary.satelliteAlerts} alertas satelitales demo y {riskSummary.critical} zona crítica.</p>
+            </div>
+            <a className="btn-primary" href="/territorio">Abrir módulo territorial</a>
+          </div>
         </section>
 
         <section className="mt-6 grid gap-5 xl:grid-cols-[1.15fr_.85fr]">

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Activity, AlertTriangle, BarChart3, Car, FileText, Gauge, Map, RadioTower, Shield, Siren, Users } from "lucide-react";
+import { Activity, AlertTriangle, BarChart3, Car, FileText, Gauge, Map, RadioTower, Satellite, Shield, Siren, Users } from "lucide-react";
 import { BrandMark } from "@/components/brand-mark";
 
 const items = [
@@ -8,6 +8,7 @@ const items = [
   { href: "/incidentes", label: "Incidentes", icon: Siren },
   { href: "/despacho", label: "Despacho", icon: RadioTower },
   { href: "/unidades", label: "Unidades", icon: Shield },
+  { href: "/territorio", label: "Riesgo territorial", icon: Satellite },
   { href: "/transito", label: "Transito", icon: Car },
   { href: "/alertas", label: "Alertas", icon: AlertTriangle },
   { href: "/reportes", label: "Reportes", icon: BarChart3 },
