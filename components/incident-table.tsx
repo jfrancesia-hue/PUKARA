@@ -5,16 +5,16 @@ import { formatDateTime, responseMinutes } from "@/lib/utils";
 
 export function IncidentTable({ incidents }: { incidents: Incident[] }) {
   return (
-    <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.045]">
+    <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/[0.055] shadow-[0_20px_80px_rgba(0,0,0,.22)] backdrop-blur-xl">
       <table className="w-full min-w-[900px] border-collapse text-sm">
-        <thead className="bg-white/[0.06] text-left text-xs uppercase tracking-[0.18em] text-arena/55">
+        <thead className="bg-gradient-to-r from-techno/10 via-white/[0.07] to-copper/10 text-left text-xs uppercase tracking-[0.18em] text-arena/65">
           <tr>
             <th className="px-4 py-4">Codigo</th><th className="px-4 py-4">Incidente</th><th className="px-4 py-4">Zona</th><th className="px-4 py-4">Criticidad</th><th className="px-4 py-4">Estado</th><th className="px-4 py-4">Unidad</th><th className="px-4 py-4">Respuesta</th><th className="px-4 py-4">Creado</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-white/10">
           {incidents.map((incident) => (
-            <tr key={incident.id} className="transition hover:bg-white/[0.04]">
+            <tr key={incident.id} className="transition hover:bg-techno/[0.055]">
               <td className="px-4 py-4 font-black text-techno"><Link href={`/incidentes/${incident.id}`}>{incident.code}</Link></td>
               <td className="px-4 py-4"><p className="font-bold text-white">{incident.title}</p><p className="text-xs text-arena/55">{incident.category}</p></td>
               <td className="px-4 py-4 text-arena/75">{incident.jurisdictions?.name ?? incident.address ?? "-"}</td>

@@ -21,6 +21,8 @@ body {
     #071A2C;
   background-size: 44px 44px, 44px 44px, auto, auto, auto;
   color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
 }
 
 body::before {
@@ -43,7 +45,31 @@ button, input, textarea, select { font: inherit; }
 
 @layer components {
   .glass-panel {
-    @apply border border-white/10 bg-white/[0.055] shadow-glow backdrop-blur-xl;
+    @apply border border-white/10 bg-white/[0.06] shadow-glow backdrop-blur-xl;
+  }
+  .command-surface {
+    @apply relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] shadow-glow backdrop-blur-xl;
+  }
+  .command-surface::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 15% 15%, rgba(24,183,164,.14), transparent 32%),
+      radial-gradient(circle at 90% 10%, rgba(200,120,58,.12), transparent 28%),
+      linear-gradient(135deg, rgba(255,255,255,.06), transparent 42%);
+  }
+  .command-surface > * {
+    position: relative;
+  }
+  .topo-lines {
+    background-image:
+      repeating-radial-gradient(ellipse at 10% 10%, transparent 0 18px, rgba(231,211,176,.11) 19px, transparent 20px),
+      repeating-radial-gradient(ellipse at 90% 80%, transparent 0 22px, rgba(24,183,164,.10) 23px, transparent 24px);
+  }
+  .premium-border {
+    @apply border border-white/10 ring-1 ring-white/[0.03];
   }
   .field {
     @apply w-full rounded-2xl border border-white/10 bg-night/70 px-4 py-3 text-sm text-white outline-none transition placeholder:text-arena/40 focus:border-techno/70 focus:ring-2 focus:ring-techno/20;
@@ -56,5 +82,11 @@ button, input, textarea, select { font: inherit; }
   }
   .section-title {
     @apply text-xl font-black tracking-tight text-white md:text-2xl;
+  }
+  .micro-label {
+    @apply text-[11px] font-black uppercase tracking-[0.24em] text-arena/50;
+  }
+  .status-dot {
+    @apply h-2 w-2 rounded-full bg-techno shadow-[0_0_18px_rgba(24,183,164,.9)];
   }
 }

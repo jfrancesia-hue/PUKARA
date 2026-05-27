@@ -21,7 +21,7 @@ export default async function DashboardPage() {
       <KpiCard title="Respuesta prom." value={data.kpis.avgResponse === null ? "-" : `${data.kpis.avgResponse}m`} hint="Creacion hasta arribo/resolucion" icon={Clock} tone="emergency" />
       <KpiCard title="Unidades disp." value={data.kpis.availableUnits} hint="Recursos listos para despacho" icon={ShieldCheck} />
     </section>
-    <section className="mt-6 grid gap-5 xl:grid-cols-[1.2fr_.8fr]"><MapSection incidents={data.incidents} units={data.units} traffic={data.traffic} /><div className="glass-panel rounded-3xl p-5"><h2 className="section-title mb-4">Panel situacion actual</h2><IncidentTable incidents={data.incidents.slice(0, 6)} /></div></section>
+    <section className="mt-6 grid gap-5 xl:grid-cols-[1.2fr_.8fr]"><div className="command-surface p-3"><MapSection incidents={data.incidents} units={data.units} traffic={data.traffic} /></div><div className="command-surface rounded-3xl p-5"><h2 className="section-title mb-4">Panel situacion actual</h2><IncidentTable incidents={data.incidents.slice(0, 6)} /></div></section>
     <section className="mt-6"><ReportCharts incidents={data.incidents} /></section>
   </AppShell>;
 }

@@ -8,13 +8,14 @@ export function KpiCard({ title, value, hint, icon: Icon, tone = "techno" }: { t
     emergency: "text-emergency bg-emergency/10 border-emergency/20"
   }[tone];
   return (
-    <article className="glass-panel rounded-3xl p-5">
+    <article className="command-surface group rounded-3xl p-5 transition duration-300 hover:-translate-y-0.5 hover:border-techno/25">
+      <div className={`absolute inset-x-0 top-0 h-1 ${tone === "alert" ? "bg-alert" : tone === "emergency" ? "bg-emergency" : tone === "copper" ? "bg-copper" : "bg-techno"}`} />
       <div className="flex items-start justify-between gap-4">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-arena/55">{title}</p>
-          <p className="mt-3 text-4xl font-black tracking-tight text-white">{value}</p>
+          <p className="micro-label">{title}</p>
+          <p className="mt-3 text-4xl font-black tracking-tight text-white md:text-5xl">{value}</p>
         </div>
-        <div className={`rounded-2xl border p-3 ${toneClass}`}><Icon className="h-5 w-5" /></div>
+        <div className={`rounded-2xl border p-3 shadow-[inset_0_1px_0_rgba(255,255,255,.08)] ${toneClass}`}><Icon className="h-5 w-5" /></div>
       </div>
       <p className="mt-4 text-sm text-arena/62">{hint}</p>
     </article>
