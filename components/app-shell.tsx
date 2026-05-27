@@ -9,7 +9,7 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
       <AppSidebar role={profile?.role} />
       <div className="min-w-0 flex-1">
         <Topbar profile={profile} email={user?.email ?? null} />
-        <main className="mx-auto w-full max-w-[1800px] px-4 py-5 md:px-6 lg:px-8">{children}</main>
+        <main className="mx-auto w-full max-w-[1900px] px-4 py-5 md:px-6 lg:px-7">{children}</main>
       </div>
     </div>
   );
