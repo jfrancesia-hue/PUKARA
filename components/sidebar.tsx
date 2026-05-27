@@ -6,21 +6,45 @@ import { Activity, AlertTriangle, BarChart3, Bell, Bot, Car, FileText, Gauge, Ma
 import { BrandMark } from "@/components/brand-mark";
 import { cn } from "@/lib/utils";
 
+const toneStyles = {
+  verde: {
+    text: "text-[#6ee7a8]",
+    icon: "text-[#35d889]",
+    hover: "hover:border-[#35d889]/30 hover:bg-[#35d889]/8",
+    active: "border-[#35d889]/30 bg-[#35d889]/8",
+    line: "bg-[#35d889]"
+  },
+  amarillo: {
+    text: "text-emergency",
+    icon: "text-emergency",
+    hover: "hover:border-emergency/35 hover:bg-emergency/8",
+    active: "border-emergency/35 bg-emergency/8",
+    line: "bg-emergency"
+  },
+  rojo: {
+    text: "text-alert",
+    icon: "text-alert",
+    hover: "hover:border-alert/35 hover:bg-alert/8",
+    active: "border-alert/35 bg-alert/8",
+    line: "bg-alert"
+  }
+} as const;
+
 const items = [
-  { href: "/dashboard", label: "Dashboard", icon: Gauge },
-  { href: "/mapa", label: "Mapa operativo", icon: Map },
-  { href: "/incidentes", label: "Incidentes", icon: Siren },
-  { href: "/despacho", label: "Despacho", icon: RadioTower },
-  { href: "/unidades", label: "Unidades", icon: Shield },
-  { href: "/territorio", label: "Riesgo territorial", icon: Satellite },
-  { href: "/ia", label: "IA operativa", icon: Bot },
-  { href: "/notificaciones", label: "Notificaciones", icon: Bell },
-  { href: "/transito", label: "Transito", icon: Car },
-  { href: "/alertas", label: "Alertas", icon: AlertTriangle },
-  { href: "/reportes", label: "Reportes", icon: BarChart3 },
-  { href: "/auditoria", label: "Auditoria", icon: FileText },
-  { href: "/reportar", label: "Portal ciudadano", icon: Users }
-];
+  { href: "/dashboard", label: "Dashboard", icon: Gauge, tone: "verde" },
+  { href: "/mapa", label: "Mapa operativo", icon: Map, tone: "verde" },
+  { href: "/incidentes", label: "Incidentes", icon: Siren, tone: "amarillo" },
+  { href: "/despacho", label: "Despacho", icon: RadioTower, tone: "amarillo" },
+  { href: "/unidades", label: "Unidades", icon: Shield, tone: "verde" },
+  { href: "/territorio", label: "Riesgo territorial", icon: Satellite, tone: "rojo" },
+  { href: "/ia", label: "IA operativa", icon: Bot, tone: "verde" },
+  { href: "/notificaciones", label: "Notificaciones", icon: Bell, tone: "amarillo" },
+  { href: "/transito", label: "Transito", icon: Car, tone: "amarillo" },
+  { href: "/alertas", label: "Alertas", icon: AlertTriangle, tone: "rojo" },
+  { href: "/reportes", label: "Reportes", icon: BarChart3, tone: "verde" },
+  { href: "/auditoria", label: "Auditoria", icon: FileText, tone: "verde" },
+  { href: "/reportar", label: "Portal ciudadano", icon: Users, tone: "verde" }
+] as const;
 
 export function AppSidebar({ role }: { role?: string }) {
   const pathname = usePathname();
@@ -36,18 +60,21 @@ export function AppSidebar({ role }: { role?: string }) {
         <nav className="mt-4 flex-1 space-y-1 pb-4">
           {items.map((item) => {
             const active = pathname === item.href || (item.href !== "/dashboard" && pathname.startsWith(`${item.href}/`));
+            const tone = toneStyles[item.tone];
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
                   "group relative flex items-center gap-2.5 overflow-hidden rounded-xl border px-3 py-2.5 text-[13px] font-bold transition",
-                  "border-white/8 bg-white/[0.025] text-arena/78 hover:border-copper/35 hover:bg-white/[0.075] hover:text-white",
-                  active && "border-techno/35 bg-gradient-to-r from-techno/18 via-white/[0.07] to-transparent text-white shadow-glow"
+                  "border-transparent bg-transparent hover:text-white",
+                  tone.text,
+                  tone.hover,
+                  active && tone.active
                 )}
               >
-                <span className={cn("absolute bottom-2 left-0 top-2 w-1 rounded-r-full bg-transparent transition", active && "bg-copper")} />
-                <item.icon className={cn("h-4 w-4 shrink-0 text-techno transition group-hover:scale-110", active && "text-copper")} />
+                <span className={cn("absolute bottom-2 left-0 top-2 w-0.5 rounded-r-full bg-transparent opacity-0 transition group-hover:opacity-100", active && `opacity-100 ${tone.line}`)} />
+                <item.icon className={cn("h-4 w-4 shrink-0 opacity-85 transition group-hover:scale-110 group-hover:opacity-100", tone.icon)} />
                 <span className="truncate">{item.label}</span>
               </Link>
             );
