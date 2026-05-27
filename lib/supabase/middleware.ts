@@ -25,8 +25,9 @@ export async function updateSession(request: NextRequest) {
   });
 
   const { data: { user } } = await supabase.auth.getUser();
+  const isDemoSession = request.cookies.get("pukara_demo_session")?.value === "1";
   const isPublic = PUBLIC_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`));
-  if (!user && !isPublic) {
+  if (!user && !isDemoSession && !isPublic) {
     const loginUrl = request.nextUrl.clone();
     loginUrl.pathname = "/login";
     loginUrl.searchParams.set("next", pathname);

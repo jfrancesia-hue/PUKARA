@@ -1,4 +1,4 @@
-import type { Incident, TrafficEvent, Unit } from "@/lib/types";
+import type { AuditLog, Incident, Jurisdiction, TrafficEvent, Unit } from "@/lib/types";
 
 const now = new Date();
 const iso = (minutesAgo: number) => new Date(now.getTime() - minutesAgo * 60_000).toISOString();
@@ -44,6 +44,13 @@ export const demoUnits: Unit[] = [
     current_lat: -27.6502,
     current_lng: -67.0285
   }
+];
+
+export const demoJurisdictions: Jurisdiction[] = [
+  { id: "capital", name: "Capital", province: "Catamarca", lat: -28.4696, lng: -65.7795 },
+  { id: "valle-viejo", name: "Valle Viejo", province: "Catamarca", lat: -28.5186, lng: -65.7094 },
+  { id: "belen", name: "Belen", province: "Catamarca", lat: -27.6513, lng: -67.0266 },
+  { id: "andalgala", name: "Andalgala", province: "Catamarca", lat: -27.5819, lng: -66.3162 }
 ];
 
 export const demoIncidents: Incident[] = [
@@ -193,3 +200,63 @@ export const demoKpis = {
   avgResponse: 14,
   availableUnits: demoUnits.filter((unit) => unit.status === "disponible").length
 };
+
+export const demoIncidentEvents = [
+  {
+    id: "event-1",
+    incident_id: "demo-inc-1",
+    actor_id: null,
+    type: "status",
+    title: "Incidente validado",
+    body: "Operador confirma requerimiento policial.",
+    created_at: iso(42)
+  },
+  {
+    id: "event-2",
+    incident_id: "demo-inc-1",
+    actor_id: null,
+    type: "dispatch",
+    title: "Unidad MOV-101 asignada",
+    body: "Patrulla Capital Norte enviada al punto.",
+    created_at: iso(40)
+  },
+  {
+    id: "event-3",
+    incident_id: "demo-inc-2",
+    actor_id: null,
+    type: "dispatch",
+    title: "Ambulancia asignada",
+    body: "AMB-031 en camino a Ruta provincial 33.",
+    created_at: iso(22)
+  }
+];
+
+export const demoAuditLogs: AuditLog[] = [
+  {
+    id: "audit-1",
+    actor_id: null,
+    action: "create",
+    entity_type: "incident",
+    entity_id: "demo-inc-1",
+    metadata: { demo: true, code: "SEG-0001" },
+    created_at: iso(45)
+  },
+  {
+    id: "audit-2",
+    actor_id: null,
+    action: "assign_unit",
+    entity_type: "incident",
+    entity_id: "demo-inc-2",
+    metadata: { demo: true, unit: "AMB-031" },
+    created_at: iso(22)
+  },
+  {
+    id: "audit-3",
+    actor_id: null,
+    action: "traffic_event_create",
+    entity_type: "traffic_event",
+    entity_id: "demo-traffic-1",
+    metadata: { demo: true },
+    created_at: iso(80)
+  }
+];

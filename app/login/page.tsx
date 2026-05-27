@@ -20,7 +20,7 @@ export default async function Login({ searchParams }: { searchParams: Promise<{ 
           <p className="font-black uppercase tracking-[0.18em] text-copper">Acceso demo</p>
           <p className="mt-2"><b>Usuario:</b> demo@pukara360.demo</p>
           <p><b>Clave:</b> PukaraDemo360!</p>
-          <p className="mt-2 text-xs text-arena/55">Redirige a una demo ficticia, sin modificar Supabase real.</p>
+          <p className="mt-2 text-xs text-arena/55">Abre la app operativa completa con datos ficticios, sin modificar Supabase real.</p>
         </div>
       </section>
     </main>

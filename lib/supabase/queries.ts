@@ -1,5 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import type { AuditLog, Incident, Jurisdiction, TrafficEvent, Unit } from "@/lib/types";
+import { cookies } from "next/headers";
+import { demoAuditLogs, demoIncidentEvents, demoIncidents, demoJurisdictions, demoTraffic, demoUnits } from "@/lib/demo-data";
 
 export type QueryResult<T> = { data: T; error?: string };
 
@@ -9,7 +11,18 @@ function errMessage(error: unknown) {
   return String(error);
 }
 
+async function isDemoSession() {
+  const cookieStore = await cookies();
+  return cookieStore.get("pukara_demo_session")?.value === "1";
+}
+
 export async function getProfile() {
+  if (await isDemoSession()) {
+    return {
+      user: { id: "demo-user", email: "demo@pukara360.demo" },
+      profile: { id: "demo-user", full_name: "Operador Demo", role: "superadmin", jurisdiction_id: "capital" }
+    };
+  }
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { user: null, profile: null };
@@ -18,18 +31,21 @@ export async function getProfile() {
 }
 
 export async function getJurisdictions(): Promise<QueryResult<Jurisdiction[]>> {
+  if (await isDemoSession()) return { data: demoJurisdictions };
   const supabase = await createClient();
   const { data, error } = await supabase.from("jurisdicciones").select("*").order("name");
   return { data: (data ?? []) as Jurisdiction[], error: errMessage(error) };
 }
 
 export async function getUnits(): Promise<QueryResult<Unit[]>> {
+  if (await isDemoSession()) return { data: demoUnits };
   const supabase = await createClient();
   const { data, error } = await supabase.from("units").select("*").order("code");
   return { data: (data ?? []) as Unit[], error: errMessage(error) };
 }
 
 export async function getIncidents(limit = 80): Promise<QueryResult<Incident[]>> {
+  if (await isDemoSession()) return { data: demoIncidents.slice(0, limit) };
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("incidents")
@@ -40,30 +56,35 @@ export async function getIncidents(limit = 80): Promise<QueryResult<Incident[]>>
 }
 
 export async function getIncident(id: string): Promise<QueryResult<Incident | null>> {
+  if (await isDemoSession()) return { data: demoIncidents.find((incident) => incident.id === id) ?? null };
   const supabase = await createClient();
   const { data, error } = await supabase.from("incidents").select("*, jurisdictions(*), units(*)").eq("id", id).maybeSingle();
   return { data: data as Incident | null, error: errMessage(error) };
 }
 
 export async function getIncidentEvents(id: string) {
+  if (await isDemoSession()) return { data: demoIncidentEvents.filter((event) => event.incident_id === id) };
   const supabase = await createClient();
   const { data, error } = await supabase.from("incident_events").select("*").eq("incident_id", id).order("created_at", { ascending: true });
   return { data: data ?? [], error: errMessage(error) };
 }
 
 export async function getAttachments(id: string) {
+  if (await isDemoSession()) return { data: [] };
   const supabase = await createClient();
   const { data, error } = await supabase.from("attachments").select("*").eq("incident_id", id).order("created_at", { ascending: false });
   return { data: data ?? [], error: errMessage(error) };
 }
 
 export async function getTrafficEvents(): Promise<QueryResult<TrafficEvent[]>> {
+  if (await isDemoSession()) return { data: demoTraffic };
   const supabase = await createClient();
   const { data, error } = await supabase.from("traffic_events").select("*, jurisdictions(*)").order("created_at", { ascending: false });
   return { data: (data ?? []) as TrafficEvent[], error: errMessage(error) };
 }
 
 export async function getAuditLogs(): Promise<QueryResult<AuditLog[]>> {
+  if (await isDemoSession()) return { data: demoAuditLogs };
   const supabase = await createClient();
   const { data, error } = await supabase.from("audit_logs").select("*").order("created_at", { ascending: false }).limit(200);
   return { data: (data ?? []) as AuditLog[], error: errMessage(error) };

@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { asNumber } from "@/lib/utils";
@@ -31,28 +32,44 @@ async function actor() {
   return user;
 }
 
+async function demoMode() {
+  const cookieStore = await cookies();
+  return cookieStore.get("pukara_demo_session")?.value === "1";
+}
+
 export async function signInAction(formData: FormData) {
-  const supabase = await createClient();
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
   const next = String(formData.get("next") ?? "/dashboard");
 
   if (email.trim().toLowerCase() === "demo@pukara360.demo" && password === "PukaraDemo360!") {
-    redirect("/demo");
+    const cookieStore = await cookies();
+    cookieStore.set("pukara_demo_session", "1", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: true,
+      path: "/",
+      maxAge: 60 * 60 * 8
+    });
+    redirect(next.startsWith("/") && next !== "/login" ? next : "/dashboard");
   }
 
+  const supabase = await createClient();
   const { error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) redirect(`/login?error=${encodeURIComponent(error.message)}`);
   redirect(next.startsWith("/") ? next : "/dashboard");
 }
 
 export async function signOutAction() {
+  const cookieStore = await cookies();
+  cookieStore.delete("pukara_demo_session");
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/login");
 }
 
 export async function createIncidentAction(formData: FormData) {
+  if (await demoMode()) redirect("/incidentes/demo-inc-1");
   const user = await actor();
   const parsed = incidentSchema.parse({
     title: emptyToNull(formData.get("title")) ?? "",
@@ -78,6 +95,11 @@ export async function createIncidentAction(formData: FormData) {
 }
 
 export async function updateIncidentStatusAction(formData: FormData) {
+  if (await demoMode()) {
+    revalidatePath("/dashboard");
+    revalidatePath("/incidentes");
+    return;
+  }
   const user = await actor();
   const id = String(formData.get("id"));
   const status = String(formData.get("status"));
@@ -96,6 +118,10 @@ export async function updateIncidentStatusAction(formData: FormData) {
 }
 
 export async function assignUnitAction(formData: FormData) {
+  if (await demoMode()) {
+    revalidatePath("/despacho");
+    return;
+  }
   const user = await actor();
   const id = String(formData.get("incident_id"));
   const unitId = emptyToNull(formData.get("unit_id"));
@@ -111,6 +137,7 @@ export async function assignUnitAction(formData: FormData) {
 }
 
 export async function uploadEvidenceAction(formData: FormData) {
+  if (await demoMode()) return;
   const user = await actor();
   const incidentId = String(formData.get("incident_id"));
   const file = formData.get("file");
@@ -126,6 +153,10 @@ export async function uploadEvidenceAction(formData: FormData) {
 }
 
 export async function createTrafficEventAction(formData: FormData) {
+  if (await demoMode()) {
+    revalidatePath("/transito");
+    return;
+  }
   const supabase = await createClient();
   const payload = {
     title: emptyToNull(formData.get("title")),
