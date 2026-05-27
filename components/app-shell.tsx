@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/sidebar";
 import { Topbar } from "@/components/topbar";
+import { MobileNav } from "@/components/mobile-nav";
 import { getProfile } from "@/lib/supabase/queries";
 
 export async function AppShell({ children }: { children: React.ReactNode }) {
@@ -14,7 +15,8 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
       <AppSidebar role={profile?.role} />
       <div className="min-w-0 flex-1">
         <Topbar profile={profile} email={user?.email ?? null} />
-        <main className="mx-auto w-full max-w-[1900px] px-4 py-5 md:px-6 lg:px-7 xl:px-9">{children}</main>
+        <main className="mx-auto w-full max-w-[1900px] px-4 pb-28 pt-5 md:px-6 lg:px-7 lg:pb-8 xl:px-9">{children}</main>
+        <MobileNav />
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ Plataforma Unificada de Seguridad, Transito y Respuesta Territorial para gobiern
 - Supabase Auth, Database, Storage y Realtime
 - Recharts
 - Leaflet
+- PWA instalable como web app móvil
 
 ## Modulos
 

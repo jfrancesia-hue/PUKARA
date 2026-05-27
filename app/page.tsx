@@ -49,6 +49,9 @@ export default function Home() {
             </Link>
             <Link href="/reportar" className="btn-secondary text-base">Probar portal ciudadano</Link>
           </div>
+          <div className="mt-4 rounded-3xl border border-techno/20 bg-techno/10 p-4 text-sm text-arena/75">
+            <b className="text-techno">Web app móvil:</b> desde Chrome o Safari podés instalar PUKARA 360 en el inicio del celular y usarla en pantalla completa.
+          </div>
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             {[
               ["Realtime", "Supabase"],
