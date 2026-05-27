@@ -12,6 +12,8 @@ Plataforma Unificada de Seguridad, Transito y Respuesta Territorial para gobiern
 
 ## Modulos
 
+- `/` home publica de presentacion
+- `/demo` demo comercial con datos ficticios, sin tocar Supabase
 - `/dashboard` KPIs ejecutivos, mapa y situacion actual
 - `/mapa` mapa operativo fullscreen
 - `/incidentes` CRUD, timeline, despacho y evidencias
